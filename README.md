@@ -1,12 +1,12 @@
 # US oil and gas methane emissions, 2019–2024
 
-Annual gridded oil and gas CH4 emissions for eight inversion scenarios and their arithmetic mean, at 0.5° latitude × 0.625° longitude resolution.
+Annual and daily gridded oil and gas CH4 emissions for eight inversion scenarios and their arithmetic mean, at 0.5° latitude × 0.625° longitude resolution.
 
 Paper: https://doi.org/10.1038/s43247-026-04039-0
 
-The NetCDF and MATLAB files contain the same data. `scenarios.csv` identifies the posterior run and sector-allocation prior for each scenario.
+The annual NetCDF and MATLAB files contain the same data. Daily files are in [`daily/`](daily/), with one NetCDF per month containing all eight scenarios and the daily ensemble mean. See the [daily data description](daily/README.md) for variables and units. `scenarios.csv` identifies the posterior run and sector-allocation prior for each scenario.
 
-## Variables and units
+## Annual variables and units
 
 - `oil_gas_annual_mass`: annual CH4 mass per grid cell, in kg.
 - `oil_gas_annual_mass_mean`: equal-weight mean of the eight scenarios, in kg per cell.
