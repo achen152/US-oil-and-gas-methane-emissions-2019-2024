@@ -1,9 +1,0 @@
-scenario,initial_conditions,warm_up,wetland,anthropogenic,parameter_1_Q,parameter_2_R,decorrelation_time_days,decorrelation_length_km
-1,CAMS,8 months,WetCHARTs,EDGAR v8,1,25,30,500
-2,CAMS,8 months,GCP,GHGI,1,25,30,500
-3,Chen et al. (2025),1 month,WetCHARTs,EDGAR v8,1,25,30,500
-4,Chen et al. (2025),1 month,GCP,GHGI,1,25,30,500
-5,Chen et al. (2025),1 month,WetCHARTs,EDGAR v8,1,15,30,500
-6,Chen et al. (2025),1 month,WetCHARTs,EDGAR v8,2,25,30,500
-7,Chen et al. (2025),1 month,WetCHARTs,EDGAR v8,1,25,90,500
-8,Chen et al. (2025),1 month,WetCHARTs,EDGAR v8,1,15,30,200

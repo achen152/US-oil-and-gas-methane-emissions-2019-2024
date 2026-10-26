@@ -1,41 +1,26 @@
 # US oil and gas methane emissions, 2019–2024
 
-Annual gridded oil and gas CH4 emissions for eight inversion scenarios and their arithmetic mean, at 0.5° latitude × 0.625° longitude resolution. This repository contains annual NetCDF data only.
+Annual mean oil and gas CH4 emission grids from the [study](https://doi.org/10.1038/s43247-026-04039-0), at **0.5° latitude × 0.625° longitude** resolution.
 
-Paper: [U.S. oil and gas methane emission intensity declined 2019–2024 with little indication of federal policy impact](https://doi.org/10.1038/s43247-026-04039-0).
+Each NetCDF file contains one calendar year's grid, averaged across the original study ensemble. There are six files, one for each year from 2019 to 2024. These are annual fields, not a mean across the six years.
 
-## Table 1. Overview of scenarios used in this study
+## Data and units
 
-| Scenario | Initial Conditions | Warm-up | Wetland | Anthropogenic | Parameters* |
-| ---: | --- | --- | --- | --- | --- |
-| 1 | CAMS | 8 months | WetCHARTs | EDGAR v8 | 1, 25, 30, 500 |
-| 2 | CAMS | 8 months | GCP | GHGI | 1, 25, 30, 500 |
-| 3 | Chen et al. (2025) | 1 month | WetCHARTs | EDGAR v8 | 1, 25, 30, 500 |
-| 4 | Chen et al. (2025) | 1 month | GCP | GHGI | 1, 25, 30, 500 |
-| 5 | Chen et al. (2025) | 1 month | WetCHARTs | EDGAR v8 | 1, 15, 30, 500 |
-| 6 | Chen et al. (2025) | 1 month | WetCHARTs | EDGAR v8 | 2, 25, 30, 500 |
-| 7 | Chen et al. (2025) | 1 month | WetCHARTs | EDGAR v8 | 1, 25, 90, 500 |
-| 8 | Chen et al. (2025) | 1 month | WetCHARTs | EDGAR v8 | 1, 15, 30, 200 |
+- `oil_gas_annual_mass_mean(lat, lon)`: **kg CH4 per grid cell**, integrated over the calendar year identified by `year`.
+- `lat`, `lon`, `lat_bounds`, `lon_bounds`: grid coordinates and bounds in degrees.
+- `cell_area` and `paper_cell_area`: grid-cell areas in m².
+- `analysis_mask` and `conus_mask`: original analysis and contiguous-US masks.
 
-\* Parameters are listed in this order: (1) square root of the diagonal elements of **Q** (10⁻¹⁰ kg m⁻² s⁻¹); (2) square root of the diagonal elements of **R** (ppb); (3) de-correlation time (days); and (4) de-correlation length (km). Scenarios 5–8 are sensitivity tests with perturbed parameters relative to baseline Scenario 3.
+Cell area is already included in the mass variable. Sum grid-cell masses within the desired region to obtain its annual emissions; use fractional overlap for boundary cells if needed. Divide kg by 10⁹ to convert to Tg CH4. These are CH4 masses, not CO2 equivalents.
 
-**Data note:** Scenarios 3 and 7 use different de-correlation times (30 and 90 days). Their annual grids differ in 2019, 2020, and 2022–2024, but are identical for 2021. The local source workbook also has identical 2021 values for these two scenarios. The reason for the 2021 equality is unresolved.
+The files preserve the original study's annual ensemble means. Oil and gas emissions were allocated from posterior total CH4 using prior sector fractions. They cover the inventory Oil + Gas sectors, not only upstream production.
 
-## Annual variables and units
+## Spatial masks
 
-- `oil_gas_annual_mass`: annual CH4 mass per grid cell, in kg.
-- `oil_gas_annual_mass_mean`: equal-weight mean of the eight scenarios, in kg per cell.
-- `oil_gas_annual_areal_mass`: annual integrated CH4 mass per unit area, in kg m-2 (NetCDF).
-- Coordinates, cell bounds, cell areas, and spatial masks are included.
+The analysis grid includes land outside the contiguous United States. Use `conus_mask` for CONUS totals. Outside-analysis cells are stored as zero and should be masked when plotting.
 
-These are calendar-year totals, including leap days, not CO2 equivalents. Divide kg by 1e9 for Tg. Annual cell mass already includes cell area.
+To reproduce the paper's national integration convention, calculate:
 
-NetCDF dimensions are scenario, year, latitude, longitude. `scenarios.csv` contains the scenario settings shown above.
+`sum(oil_gas_annual_mass_mean * paper_cell_area / cell_area * conus_mask) / 1e9`
 
-## Calculation and spatial masks
-
-Oil and gas emissions are estimated by allocating posterior total CH4 emissions according to the oil and gas fraction in the corresponding sector-allocation prior, then integrating to annual totals. Oil and gas are allocated using prior sector proportions rather than independently optimized.
-
-`analysis_mask` is the original land mask. Use `conus_mask` for US national totals; the land mask alone includes cells outside CONUS. Outside-analysis cells are stored as zero and should be masked for plotting.
-
-`cell_area` is HEMCO grid-cell area. `paper_cell_area` is the area used in the original national analysis. To reproduce national totals, sum annual areal mass × `paper_cell_area` × `conus_mask`. Please cite the paper when using these data.
+The result is Tg CH4 for that year. Please cite the paper when using these data.
