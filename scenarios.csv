@@ -1,9 +1,9 @@
-scenario,posterior_folder,sector_allocation_prior_folder
-1,US-post-CAMS,US-prior-EDGAR-WetCharts
-2,US-post-CAMS,US-prior-GHGI-GCP
-3,US-post-13month,US-prior-EDGAR-WetCharts
-4,US-post-13month,US-prior-GHGI-GCP
-5,US-post-15ppb,US-prior-EDGAR-WetCharts
-6,US-post-Q2e-10,US-prior-EDGAR-WetCharts
-7,US-post-90days,US-prior-EDGAR-WetCharts
-8,US-post-200km15ppb,US-prior-EDGAR-WetCharts
+scenario,initial_conditions,warm_up,wetland,anthropogenic,parameter_1_Q,parameter_2_R,decorrelation_time_days,decorrelation_length_km
+1,CAMS,8 months,WetCHARTs,EDGAR v8,1,25,30,500
+2,CAMS,8 months,GCP,GHGI,1,25,30,500
+3,Chen et al. (2025),1 month,WetCHARTs,EDGAR v8,1,25,30,500
+4,Chen et al. (2025),1 month,GCP,GHGI,1,25,30,500
+5,Chen et al. (2025),1 month,WetCHARTs,EDGAR v8,1,15,30,500
+6,Chen et al. (2025),1 month,WetCHARTs,EDGAR v8,2,25,30,500
+7,Chen et al. (2025),1 month,WetCHARTs,EDGAR v8,1,25,90,500
+8,Chen et al. (2025),1 month,WetCHARTs,EDGAR v8,1,15,30,200
